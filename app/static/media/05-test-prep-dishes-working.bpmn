@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="http://www.example.com/bpmn"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+
+  <process id="restaurant_process" name="Restaurant Process" isExecutable="true">
+    <startEvent id="startEvent_1" name="Client fait une réservation">
+      <outgoing>flow_startEvent_1_task_1</outgoing>
+    </startEvent>
+    <task id="task_1" name="Vérifier disponibilité">
+      <incoming>flow_startEvent_1_task_1</incoming>
+      <outgoing>flow_task_1_gateway_1</outgoing>
+    </task>
+    <exclusiveGateway id="gateway_1" name="Disponibilité vérifiée ?">
+      <incoming>flow_task_1_gateway_1</incoming>
+      <outgoing>flow_gateway_1_task_2</outgoing>
+      <outgoing>flow_gateway_1_task_3</outgoing>
+    </exclusiveGateway>
+    <task id="task_2" name="Confirmer la réservation">
+      <incoming>flow_gateway_1_task_2</incoming>
+      <outgoing>flow_task_2_task_4</outgoing>
+    </task>
+    <task id="task_3" name="Informer le client de l'indisponibilité">
+      <incoming>flow_gateway_1_task_3</incoming>
+    </task>
+    <task id="task_4" name="Accueillir le client à l'arrivée">
+      <incoming>flow_task_2_task_4</incoming>
+      <outgoing>flow_task_4_parallelGateway_1</outgoing>
+    </task>
+    <parallelGateway id="parallelGateway_1" name="Démarrer la préparation des plats">
+      <incoming>flow_task_4_parallelGateway_1</incoming>
+      <outgoing>flow_parallelGateway_1_task_5</outgoing>
+      <outgoing>flow_parallelGateway_1_task_6</outgoing>
+      <outgoing>flow_parallelGateway_1_task_7</outgoing>
+      <outgoing>flow_parallelGateway_1_task_8</outgoing>
+      <outgoing>flow_parallelGateway_1_task_9</outgoing>
+    </parallelGateway>
+    <task id="task_5" name="Brigade Viandes prépare les viandes">
+      <incoming>flow_parallelGateway_1_task_5</incoming>
+      <outgoing>flow_task_5_task_10</outgoing>
+    </task>
+    <task id="task_6" name="Brigade Volailles prépare les volailles">
+      <incoming>flow_parallelGateway_1_task_6</incoming>
+      <outgoing>flow_task_6_task_10</outgoing>
+    </task>
+    <task id="task_7" name="Brigade Poissons prépare les poissons">
+      <incoming>flow_parallelGateway_1_task_7</incoming>
+      <outgoing>flow_task_7_task_10</outgoing>
+    </task>
+    <task id="task_8" name="Commis Saucier prépare les sauces">
+      <incoming>flow_parallelGateway_1_task_8</incoming>
+      <outgoing>flow_task_8_task_10</outgoing>
+    </task>
+    <task id="task_9" name="Brigade Desserts prépare les desserts">
+      <incoming>flow_parallelGateway_1_task_9</incoming>
+      <outgoing>flow_task_9_task_10</outgoing>
+    </task>
+    <task id="task_10" name="Service de Salle sert les plats">
+      <incoming>flow_task_5_task_10</incoming>
+      <incoming>flow_task_6_task_10</incoming>
+      <incoming>flow_task_7_task_10</incoming>
+      <incoming>flow_task_8_task_10</incoming>
+      <incoming>flow_task_9_task_10</incoming>
+      <outgoing>flow_task_10_endEvent_1</outgoing>
+    </task>
+    <endEvent id="endEvent_1" name="Fin du service">
+      <incoming>flow_task_10_endEvent_1</incoming>
+    </endEvent>
+
+    <!-- Define sequence flows -->
+    <sequenceFlow id="flow_startEvent_1_task_1" sourceRef="startEvent_1" targetRef="task_1"/>
+    <sequenceFlow id="flow_task_1_gateway_1" sourceRef="task_1" targetRef="gateway_1"/>
+    <sequenceFlow id="flow_gateway_1_task_2" sourceRef="gateway_1" targetRef="task_2"/>
+    <sequenceFlow id="flow_gateway_1_task_3" sourceRef="gateway_1" targetRef="task_3"/>
+    <sequenceFlow id="flow_task_2_task_4" sourceRef="task_2" targetRef="task_4"/>
+    <sequenceFlow id="flow_task_4_parallelGateway_1" sourceRef="task_4" targetRef="parallelGateway_1"/>
+    <sequenceFlow id="flow_parallelGateway_1_task_5" sourceRef="parallelGateway_1" targetRef="task_5"/>
+    <sequenceFlow id="flow_parallelGateway_1_task_6" sourceRef="parallelGateway_1" targetRef="task_6"/>
+    <sequenceFlow id="flow_parallelGateway_1_task_7" sourceRef="parallelGateway_1" targetRef="task_7"/>
+    <sequenceFlow id="flow_parallelGateway_1_task_8" sourceRef="parallelGateway_1" targetRef="task_8"/>
+    <sequenceFlow id="flow_parallelGateway_1_task_9" sourceRef="parallelGateway_1" targetRef="task_9"/>
+    <sequenceFlow id="flow_task_5_task_10" sourceRef="task_5" targetRef="task_10"/>
+    <sequenceFlow id="flow_task_6_task_10" sourceRef="task_6" targetRef="task_10"/>
+    <sequenceFlow id="flow_task_7_task_10" sourceRef="task_7" targetRef="task_10"/>
+    <sequenceFlow id="flow_task_8_task_10" sourceRef="task_8" targetRef="task_10"/>
+    <sequenceFlow id="flow_task_9_task_10" sourceRef="task_9" targetRef="task_10"/>
+    <sequenceFlow id="flow_task_10_endEvent_1" sourceRef="task_10" targetRef="endEvent_1"/>
+  </process>
+
+  <!-- BPMN diagram information -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_restaurant_process">
+    <bpmndi:BPMNPlane id="BPMNPlane_restaurant_process" bpmnElement="restaurant_process">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="startEvent_1">
+        <omgdc:Bounds x="173" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1_di" bpmnElement="task_1">
+        <omgdc:Bounds x="258" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1_di" bpmnElement="gateway_1" isMarkerVisible="true">
+        <omgdc:Bounds x="398" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_2_di" bpmnElement="task_2">
+        <omgdc:Bounds x="498" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_3_di" bpmnElement="task_3">
+        <omgdc:Bounds x="498" y="200" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_4_di" bpmnElement="task_4">
+        <omgdc:Bounds x="618" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ParallelGateway_1_di" bpmnElement="parallelGateway_1" isMarkerVisible="true">
+        <omgdc:Bounds x="758" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_5_di" bpmnElement="task_5">
+        <omgdc:Bounds x="858" y="30" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_6_di" bpmnElement="task_6">
+        <omgdc:Bounds x="858" y="130" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_7_di" bpmnElement="task_7">
+        <omgdc:Bounds x="858" y="230" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_8_di" bpmnElement="task_8">
+        <omgdc:Bounds x="978" y="30" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_9_di" bpmnElement="task_9">
+        <omgdc:Bounds x="978" y="130" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_10_di" bpmnElement="task_10">
+        <omgdc:Bounds x="978" y="230" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="endEvent_1">
+        <omgdc:Bounds x="1120" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_startEvent_1_task_1_di" bpmnElement="flow_startEvent_1_task_1">
+        <omgdi:waypoint x="209" y="120" />
+        <omgdi:waypoint x="258" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_1_gateway_1_di" bpmnElement="flow_task_1_gateway_1">
+        <omgdi:waypoint x="358" y="120" />
+        <omgdi:waypoint x="398" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_gateway_1_task_2_di" bpmnElement="flow_gateway_1_task_2">
+        <omgdi:waypoint x="448" y="120" />
+        <omgdi:waypoint x="498" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_gateway_1_task_3_di" bpmnElement="flow_gateway_1_task_3">
+        <omgdi:waypoint x="423" y="145" />
+        <omgdi:waypoint x="423" y="200" />
+        <omgdi:waypoint x="498" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_2_task_4_di" bpmnElement="flow_task_2_task_4">
+        <omgdi:waypoint x="598" y="120" />
+        <omgdi:waypoint x="618" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_4_parallelGateway_1_di" bpmnElement="flow_task_4_parallelGateway_1">
+        <omgdi:waypoint x="718" y="120" />
+        <omgdi:waypoint x="758" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_parallelGateway_1_task_5_di" bpmnElement="flow_parallelGateway_1_task_5">
+        <omgdi:waypoint x="808" y="95" />
+        <omgdi:waypoint x="858" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_parallelGateway_1_task_6_di" bpmnElement="flow_parallelGateway_1_task_6">
+        <omgdi:waypoint x="808" y="120" />
+        <omgdi:waypoint x="858" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_parallelGateway_1_task_7_di" bpmnElement="flow_parallelGateway_1_task_7">
+        <omgdi:waypoint x="808" y="145" />
+        <omgdi:waypoint x="808" y="230" />
+        <omgdi:waypoint x="858" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_parallelGateway_1_task_8_di" bpmnElement="flow_parallelGateway_1_task_8">
+        <omgdi:waypoint x="808" y="95" />
+        <omgdi:waypoint x="978" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_parallelGateway_1_task_9_di" bpmnElement="flow_parallelGateway_1_task_9">
+        <omgdi:waypoint x="808" y="120" />
+        <omgdi:waypoint x="978" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_5_task_10_di" bpmnElement="flow_task_5_task_10">
+        <omgdi:waypoint x="958" y="70" />
+        <omgdi:waypoint x="978" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_6_task_10_di" bpmnElement="flow_task_6_task_10">
+        <omgdi:waypoint x="958" y="170" />
+        <omgdi:waypoint x="978" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_7_task_10_di" bpmnElement="flow_task_7_task_10">
+        <omgdi:waypoint x="958" y="270" />
+        <omgdi:waypoint x="978" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_8_task_10_di" bpmnElement="flow_task_8_task_10">
+        <omgdi:waypoint x="1078" y="70" />
+        <omgdi:waypoint x="1088" y="70" />
+        <omgdi:waypoint x="978" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_9_task_10_di" bpmnElement="flow_task_9_task_10">
+        <omgdi:waypoint x="1078" y="170" />
+        <omgdi:waypoint x="1088" y="170" />
+        <omgdi:waypoint x="978" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_task_10_endEvent_1_di" bpmnElement="flow_task_10_endEvent_1">
+        <omgdi:waypoint x="1078" y="270" />
+        <omgdi:waypoint x="1120" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

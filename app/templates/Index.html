@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot de d'Entreprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- required viewer styles -->
+    <link rel="stylesheet" href="https://unpkg.com/bpmn-js@17.6.0/dist/assets/bpmn-js.css">
+
+    <!-- viewer distro (with pan and zoom) -->
+    <script src="https://unpkg.com/bpmn-js@17.6.0/dist/bpmn-navigated-viewer.development.js"></script>
+
+    <!-- needed for this example only -->
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <h2>Chat</h2>
+        </div>
+        <div id="conversation" class="chat-messages">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Posez votre question ici..." onkeypress="if(event.keyCode==13){sendMessage();}">
+            <button onclick="sendMessage();"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+
+    <div class="canvas-container">
+        <div class="header">
+            <h2>BPMN</h2>
+            <label for="fileDropdown">Procedure</label>
+            <select id="fileDropdown">
+                {% for file in media_files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div id="canvas"></div>
+    </div>
+    
+    
+</body>
+</html>

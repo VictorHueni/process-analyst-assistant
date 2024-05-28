@@ -1,0 +1,4 @@
+ipython==8.14.0
+python-dotenv==1.0.0
+llama-index==0.10.30
+Flask>=1.1.2

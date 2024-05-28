@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    margin: 0;
+    background: #f5f5f5;
+    overflow: auto;
+}
+
+.header {
+    background-color: #f5f5f5;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style the dropdown container */
+.header select {
+    width: 500px; /* Specify the width of the dropdown */
+    height: 35px; /* Specify the height of the dropdown */
+    padding: 5px; /* Add some padding */
+    font-size: 16px; /* Increase font size */
+    border: none; /* Remove border */
+    margin-left: 10px; /* Add some margin to the left */
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1); /* Add some shadow */
+    appearance: none; /* Remove default appearance */
+    -webkit-appearance: none; /* Remove default appearance for Chrome */
+    -moz-appearance: none; /* Remove default appearance for Firefox */
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='black' viewBox='0 0 24 24'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 0.75rem center/16px 16px; /* Add a custom dropdown arrow */
+}
+
+/* Style the dropdown options */
+.header option {
+    padding: 10px; /* Add some padding to the options */
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 25%;
+}
+
+
+.chat-messages {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-input {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+}
+
+.chat-input input {
+    flex: 1 1 auto;
+    margin-right: 10px;
+    padding: 10px; /* Add padding */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
+}
+
+.chat-input input:focus {
+    border-color: green; /* Change border color when focused */
+    outline: none; /* Remove default outline */
+}
+
+.chat-input button {
+    background-color: green; /* Change background color */
+    color: #fff; /* Change text color */
+    border: none; /* Remove border */
+    border-radius: 50%; /* Make it round */
+    width: 40px; /* Set width */
+    height: 40px; /* Set height */
+    display: flex; /* Use flexbox to center the icon */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.chat-input button i {
+    font-size: 16px; /* Set icon size */
+}
+
+.message-user {
+    background-color: lightgreen;
+    align-self: flex-end;
+    color: black;
+    border-radius: 10px 0px 10px 10px;
+    margin: 5px;
+    padding: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message-bot {
+    background-color: #e0e0e0;
+    align-self: flex-start;
+    color: black;
+    border-radius: 0px 10px 10px 10px;
+    margin: 5px;
+    padding: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 75%;
+}
+
+#canvas {
+    width: 100%;
+    height: calc(100vh - 5px);
+    border: 1px solid #ddd;
+    background: #fff;
+}

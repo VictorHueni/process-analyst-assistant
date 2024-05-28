@@ -1,0 +1,18 @@
+# Ignore Python virtual environments
+venv/
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore Python cache files
+__pycache__/
+
+# Ignore .env files
+.env
+
+# Ignore the storage directory
+app/static/storage/
+
+# Ignore the .idea directory
+.idea/
+
